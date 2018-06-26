@@ -21,16 +21,18 @@ knex.insert({first_name: args[0], last_name: args[1], birthdate: args[2]})
 .into('famous_people')
 .asCallback(function(err, rows){
   if(err)return console.error(err);
-  console.log('Inserted');
+  console.log('Inserted', showList() );
   return knex.destroy();
 });
 
 
-knex.select('*').from('famous_people')
-.asCallback(function(err, rows){
-  if(err)return console.error(err);
-  console.log(rows);
-});
+function showList() {
+  knex.select('*').from('famous_people')
+  .asCallback(function(err, rows){
+    if(err)return console.error(err);
+    console.log(rows);
+  });
+}
 
 
 
